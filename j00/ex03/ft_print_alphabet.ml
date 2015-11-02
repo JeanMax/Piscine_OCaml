@@ -6,15 +6,15 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/01 20:18:42 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/01 21:46:17 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/02 18:43:45 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 let ft_print_alphabet () =
-	for i = 97 to 122 do
-		print_char (char_of_int i)
-	done;
-	print_char '\n'
+	let rec zboub i =
+	print_char (char_of_int i);
+	if i < 122 then zboub(i + 1) else print_char '\n'
+	in zboub(97)
 
-let() = 
+let() =
 	ft_print_alphabet()

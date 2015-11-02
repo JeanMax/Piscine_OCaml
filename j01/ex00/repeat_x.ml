@@ -1,20 +1,29 @@
 (* ************************************************************************** *)
 (*                                                                            *)
 (*                                                        :::      ::::::::   *)
-(*   ft_print_rev.ml                                    :+:      :+:    :+:   *)
+(*   repeat_x.ml                                        :+:      :+:    :+:   *)
 (*                                                    +:+ +:+         +:+     *)
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
-(*   Created: 2015/11/01 20:26:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/02 18:49:01 by mcanal           ###   ########.fr       *)
+(*   Created: 2015/11/02 18:58:42 by mcanal            #+#    #+#             *)
+(*   Updated: 2015/11/02 19:58:12 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let ft_print_rev (str) =
-  let rec zboub i =
-	if i >= 0 then (print_char str.[i]; zboub(i - 1)) else print_char '\n'
-  in zboub(String.length str - 1)
+let repeat_x i =
+  let rec zboub(x, str) =
+	match x with
+	  0 -> str
+	| z when (z > 0) -> zboub(x - 1, str ^ "x")
+	| _ -> "Error"
+	in zboub(i, "")
 
 let() =
-	ft_print_rev "Hello world !";
-	ft_print_rev ""
+	print_endline "testing -1: ";
+	print_endline (repeat_x(-1));
+	print_endline "testing 0: ";
+	print_endline (repeat_x 0);
+	print_endline "testing 1: ";
+	print_endline (repeat_x 1);
+	print_endline "testing 5: ";
+	print_endline (repeat_x 5)
