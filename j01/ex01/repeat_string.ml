@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/02 19:26:30 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/02 20:14:21 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/03 00:14:15 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -14,7 +14,7 @@ let repeat_string ?(str="x") n =
   let rec zboub(x, s, str) =
 	match x with
 	  0 -> s
-	| z when (z > 0) -> zboub(x - 1, s ^ str, str)
+	| z when z > 0 -> zboub(x - 1, s ^ str, str)
 	| _ -> "Error"
 	in zboub(n, "", str)
 

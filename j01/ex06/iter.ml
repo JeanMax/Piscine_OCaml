@@ -1,29 +1,23 @@
 (* ************************************************************************** *)
 (*                                                                            *)
 (*                                                        :::      ::::::::   *)
-(*   repeat_x.ml                                        :+:      :+:    :+:   *)
+(*   iter.ml                                            :+:      :+:    :+:   *)
 (*                                                    +:+ +:+         +:+     *)
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
-(*   Created: 2015/11/02 18:58:42 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/03 00:14:46 by mcanal           ###   ########.fr       *)
+(*   Created: 2015/11/03 01:25:42 by mcanal            #+#    #+#             *)
+(*   Updated: 2015/11/03 01:55:14 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let repeat_x i =
-  let rec zboub(x, str) =
-	match x with
-	  0 -> str
-	| z when z > 0 -> zboub(x - 1, str ^ "x")
-	| _ -> "Error"
-	in zboub(i, "")
+let iter f x n =
+  if n < 0 then (-1) else
+	let rec zboub m acc =
+	  if (m = 0) then acc else zboub (m - 1) (f acc)
+	in zboub n x
 
 let() =
-	print_endline "testing -1: ";
-	print_endline (repeat_x(-1));
-	print_endline "testing 0: ";
-	print_endline (repeat_x 0);
-	print_endline "testing 1: ";
-	print_endline (repeat_x 1);
-	print_endline "testing 5: ";
-	print_endline (repeat_x 5)
+  print_endline "testing x² 2 -42: "; print_int (iter (fun x -> x * x) 2 (-42));
+  print_endline "\ntesting x² 2 4: "; print_int (iter (fun x -> x * x) 2 4);
+  print_endline "\ntesting 2x 2 4: "; print_int (iter (fun x -> x * 2) 2 4);
+  print_endline ""

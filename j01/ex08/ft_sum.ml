@@ -1,29 +1,21 @@
 (* ************************************************************************** *)
 (*                                                                            *)
 (*                                                        :::      ::::::::   *)
-(*   repeat_x.ml                                        :+:      :+:    :+:   *)
+(*   ft_sum.ml                                          :+:      :+:    :+:   *)
 (*                                                    +:+ +:+         +:+     *)
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
-(*   Created: 2015/11/02 18:58:42 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/03 00:14:46 by mcanal           ###   ########.fr       *)
+(*   Created: 2015/11/03 01:49:27 by mcanal            #+#    #+#             *)
+(*   Updated: 2015/11/03 02:01:28 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let repeat_x i =
-  let rec zboub(x, str) =
-	match x with
-	  0 -> str
-	| z when z > 0 -> zboub(x - 1, str ^ "x")
-	| _ -> "Error"
-	in zboub(i, "")
+let ft_sum f start stop =
+	let rec zboub n acc =
+	  if n > stop then acc else zboub (n + 1) (acc +. f n)
+	in zboub start 0.0
 
 let() =
-	print_endline "testing -1: ";
-	print_endline (repeat_x(-1));
-	print_endline "testing 0: ";
-	print_endline (repeat_x 0);
-	print_endline "testing 1: ";
-	print_endline (repeat_x 1);
-	print_endline "testing 5: ";
-	print_endline (repeat_x 5)
+	print_endline "testing (fun i -> float_of_int (i * i)) 1 10: ";
+	print_float (ft_sum (fun i -> float_of_int (i * i)) 1 10);
+	print_endline ""
