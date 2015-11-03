@@ -6,15 +6,16 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/01 20:26:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/01 22:11:33 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/03 17:33:12 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let ft_is_palindrome (s) =
+let ft_is_palindrome s =
 	let len = String.length s
-	in let rec check i = if i <= len / 2 - 1 then 
-						   s.[i] = s.[len - i - 1] && check(i + 1) else true
-	 in check(0)
+	in let rec check i =
+		 if i <= len / 2 - 1 then 
+		   s.[i] = s.[len - i - 1] && check(i + 1) else true
+	 in check 0
 
 let() =
 	print_endline "Testing 'radar':";
