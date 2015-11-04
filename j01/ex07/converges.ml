@@ -6,16 +6,14 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/03 01:37:47 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/03 01:48:26 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/03 19:11:54 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let converges f x n =
-	let rec zboub m acc =
-	if (m < 0) then false 
-	else if (acc = f acc) then true 
-	else zboub (m - 1) (f acc)
-	in zboub n x
+let rec converges f x n =
+  if (n < 0) then false 
+  else if (x = f x) then true 
+  else converges f (n - 1) (f x)
 
 let() =
 	print_endline "testing (( * ) 2) 2 5:";

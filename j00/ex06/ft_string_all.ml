@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/01 20:26:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/03 17:31:54 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/03 18:39:05 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,4 +21,6 @@ let() =
 	print_endline "Testing is_digit '1234':";
 	print_endline (if ft_string_all is_digit "1234" then "true" else "false");
 	print_endline "\nTesting is_digit '12E4':";
-	print_endline (if ft_string_all is_digit "12E4" then "true" else "false")
+	print_endline (if ft_string_all is_digit "12E4" then "true" else "false");
+	print_endline "\nTesting is_digit '':";
+	print_endline (if ft_string_all is_digit "" then "true" else "false")
