@@ -6,17 +6,16 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/02 18:58:42 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/03 00:14:46 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/04 16:52:39 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 let repeat_x i =
-  let rec zboub(x, str) =
-	match x with
-	  0 -> str
-	| z when z > 0 -> zboub(x - 1, str ^ "x")
-	| _ -> "Error"
-	in zboub(i, "")
+  let rec zboub x str =
+	if x = 0 then str
+	else if x > 0 then zboub (x - 1) (str ^ "x")
+	else "Error"
+	in zboub i ""
 
 let() =
 	print_endline "testing -1: ";
