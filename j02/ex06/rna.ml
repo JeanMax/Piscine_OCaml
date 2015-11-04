@@ -6,9 +6,16 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/04 10:25:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/04 10:48:57 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/04 20:15:46 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
+
+let list_rev l =
+  let rec list_rev_append l1 l2 =
+    match l1 with
+	  []         -> l2
+    | head::tail -> list_rev_append tail (head :: l2)
+  in list_rev_append l []
 
 (* ********************************   ex04   ******************************** *)
 
@@ -65,7 +72,7 @@ let helix_to_string hel =
 let complementary_helix hel =
   let rec zboub h com =
 	match h with
-      []       -> List.rev com
+      []       -> list_rev com
 	| hd :: tl -> zboub tl (generate_nucleotide
 							  begin match hd.b with
 									    A    -> 'T'
@@ -84,7 +91,7 @@ type rna = nucleobase list
 let generate_rna hel =
   let rec zboub h rna =
 	match h with
-	  []       -> List.rev rna
+	  []       -> list_rev rna
 	| hd :: tl -> zboub tl (begin match hd.b with
 									A    -> U
 								  | T    -> A

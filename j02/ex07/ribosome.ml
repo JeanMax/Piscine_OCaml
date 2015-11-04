@@ -6,9 +6,17 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/04 10:55:06 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/04 12:29:24 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/04 20:14:43 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
+
+let list_rev l =
+  let rec list_rev_append l1 l2 =
+	match l1 with
+	  []         -> l2
+	| head::tail -> list_rev_append tail (head :: l2)
+  in list_rev_append l []
+					 
 
 (* ********************************   ex04   ******************************** *)
 
@@ -65,7 +73,7 @@ let helix_to_string hel =
 let complementary_helix hel =
   let rec zboub h com =
 	match h with
-      []       -> List.rev com
+      []       -> list_rev com
 	| hd :: tl -> zboub tl (generate_nucleotide
 							  begin match hd.b with
 									    A    -> 'T'
@@ -84,7 +92,7 @@ type rna = nucleobase list
 let generate_rna hel =
   let rec zboub h rna =
 	match h with
-	  []       -> List.rev rna
+	  []       -> list_rev rna
 	| hd :: tl -> zboub tl (begin match hd.b with
 									A    -> U
 								  | T    -> A
@@ -105,13 +113,13 @@ let generate_bases_triplets rna =
   let rec zboub l tri =
 	match l with
 	  h::n1::n2::t -> zboub t ((h, n1, n2)::tri)
-	| _            -> List.rev tri
+	| _            -> list_rev tri
   in zboub rna []
 
 let decode_arn rna =
   let rec zboub tri pro =
 	match tri with
-	  ((U, A, A) | (U, A, G) | (U, G, A))::t                                     -> List.rev (Stop::pro)
+	  ((U, A, A) | (U, A, G) | (U, G, A))::t                                     -> list_rev (Stop::pro)
     | ((G, C, A) | (G, C, C) | (G, C, G) | (G, C, U))::t                         -> zboub t (Ala::pro)
     | ((A, G, A) | (A, G, G) | (C, G, A) | (C, G, C) | (C, G, G) | (C, G, U))::t -> zboub t (Arg::pro)
     | ((A, A, C) | (A, A, U))::t                                                 -> zboub t (Asn::pro)

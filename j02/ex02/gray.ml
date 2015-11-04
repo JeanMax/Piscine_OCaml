@@ -6,18 +6,32 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/04 01:51:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/04 02:49:50 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/04 20:04:23 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 let gray n =
   begin 
-	if n > 0 then 
-	  let rec zboub i =
-		if i = 1 then ["0"; "1"] else
-		  let l = zboub (i - 1)
-		  in List.append (List.map (fun x->"0"^x) l) (List.rev_map (fun x->"1"^x) l)
-	  in List.iter (fun x->print_string x; print_char ' ') (zboub n)
+	if n > 0 then
+	  in let rec list_iter f = function
+			 []         -> ()
+		   | head::tail -> f head; list_iter f tail
+	  in let rec list_map f = function
+			 []         -> []
+		   | head::tail -> (f head) :: list_map f tail
+	  let rec list_rev_append l1 l2 =
+		match l1 with
+		  []         -> l2
+		| head::tail -> list_rev_append tail (head :: l2)
+	  in let list_append l1 l2 =
+		   list_rev_append (list_rev_append l1 []) l2
+
+	  in let rec zboub i =
+		   if i = 1 then ["0"; "1"] else
+			 let l = zboub (i - 1)
+			 in list_append (list_map (fun x->"0"^x) l)
+							(list_rev_append (list_map (fun x->"1"^x) l) [])
+		 in list_iter (fun x->print_string x; print_char ' ') (zboub n)
   end; print_char '\n'
 
 let() =
