@@ -6,11 +6,9 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/05 16:11:58 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/05 17:00:23 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/05 22:02:02 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
-
-open Graphics
 
 let draw_square x y size =
   ()
@@ -19,4 +17,5 @@ let draw_tree_node tree =
   ()
 
 let() =
-  Graphics.open_graph ""
+  Graphics.open_graph "";
+ ignore( read_line ())

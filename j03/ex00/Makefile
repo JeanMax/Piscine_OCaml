@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/11/05 16:59:55 by mcanal           ###   ########.fr        #
+#    Updated: 2015/11/05 20:24:43 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,7 +22,6 @@ OPTOBJS = $(SRC:%.ml=$(O_DIR)/%.cmx)
 DEPS = $(O_DIR)/.depend
 
 LIBS = $(WITHGRAPHICS)
-#WITHGRAPHICS = graphics.cma -cclib -lgraphics -cclib -L/usr/X11R6/lib -cclib -lX11
 WITHGRAPHICS = graphics.cma -cclib -lgraphics
 WITHUNIX = unix.cma -cclib -lunix
 WITHSTR = str.cma -cclib -lstr
@@ -62,13 +61,13 @@ me_cry: depend $(NAME)
 -include $(DEPS)
 
 $(NAME): $(OBJS)
-	$(CAMLC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	$(CAMLC) $(CFLAGS) $(LIBS) $(OBJS) -o $(NAME)
 	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
 	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CAMLC)"
 
 opt: $(OPTOBJS)
-	$(CAMLOPT) $(CFLAGS) $(OPTOBJS) $(LIBS:.cma=.cmxa) -o $(NAME)
+	$(CAMLOPT) $(CFLAGS) $(LIBS:.cma=.cmxa) $(OPTOBJS) -o $(NAME)
 	@echo "$(BLUE)$(OPTOBJS) $(WHITE)->$(RED) $@ $(BASIC)"
 	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CAMLOPT)"
