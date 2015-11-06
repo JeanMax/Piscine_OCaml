@@ -6,11 +6,11 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/05 16:11:58 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/06 04:51:02 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/06 16:53:53 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-type 'a tree = Nil | Node of 'a tree * 'a * 'a tree
+type 'a tree = Nil | Node of 'a * 'a tree * 'a tree
 									 
 let draw_square x y size =
   Graphics.moveto (x - (size/2)) (y - (size/2));
@@ -24,7 +24,7 @@ let draw_tree_node = function
 					 Graphics.moveto 185 225;
 					 Graphics.draw_string "Nil"
 
-  | Node(_, v, _) -> draw_square 400 150 100;
+  | Node(v, _, _) -> draw_square 400 150 100;
 					 draw_square 400 300 100;
 					 draw_square 200 225 100;
 					 Graphics.moveto 350 300;
@@ -43,6 +43,6 @@ let() =
   let s = read_line ()
   in if s = "Nil" || s = "nil" || s = "NIL" || s = ""
 	 then draw_tree_node Nil
-	 else draw_tree_node (Node (Nil, s, Nil));
+	 else draw_tree_node (Node (s, Nil, Nil));
 	 ignore(read_line ());
 

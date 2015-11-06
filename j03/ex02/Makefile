@@ -6,19 +6,19 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/11/06 16:48:56 by mcanal           ###   ########.fr        #
+#    Updated: 2015/11/06 16:49:46 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = dot_slash
-SRC = gardening.ml
+SRC = cipher.ml uncipher.ml
 
 OBJS = $(SRC:.ml=.cmo)
 OPTOBJS = $(SRC:.ml=.cmx)
 TMP = $(OBJS) $(OPTOBJS) $(SRC:.ml=.cmi) $(SRC:.ml=.o)
 DEPS = .depend
 
-LIBS = $(WITHGRAPHICS)
+LIBS = 
 WITHGRAPHICS = graphics.cma -cclib -lgraphics
 WITHUNIX = unix.cma -cclib -lunix
 WITHSTR = str.cma -cclib -lstr
