@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/04 10:25:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/05 21:52:24 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/06 19:22:27 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -41,7 +41,7 @@ let generate_nucleotide n =
 type helix = nucleotide list
 
 let generate_helix n =
-  Random.self_init (); (* TODO: move this somewhere else? (test!?) *)
+  Random.self_init ();
   let rec zboub i l =
     if i <= 0 then l
     else zboub (i - 1) (begin generate_nucleotide 

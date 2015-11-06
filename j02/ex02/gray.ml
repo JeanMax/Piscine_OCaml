@@ -6,20 +6,20 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/04 01:51:21 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/04 20:04:23 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/06 19:20:20 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 let gray n =
   begin 
 	if n > 0 then
-	  in let rec list_iter f = function
+	  let rec list_iter f = function
 			 []         -> ()
 		   | head::tail -> f head; list_iter f tail
 	  in let rec list_map f = function
 			 []         -> []
 		   | head::tail -> (f head) :: list_map f tail
-	  let rec list_rev_append l1 l2 =
+	  in let rec list_rev_append l1 l2 =
 		match l1 with
 		  []         -> l2
 		| head::tail -> list_rev_append tail (head :: l2)

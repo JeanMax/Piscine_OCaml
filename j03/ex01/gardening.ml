@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/06 03:48:28 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/06 16:58:11 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/06 20:45:50 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -24,20 +24,20 @@ let rec height = function
 let draw_tree =
 	let rec zboub x y = function
 		Nil                  -> ()
-	  | Node(s, left, right) -> Graphics.draw_circle x y 24;
+	  | Node(s, left, right) -> Graphics.draw_circle x y 50;
 								Graphics.moveto (x - 12) (y - 8);
 								Graphics.draw_string s;
 								if left != Nil then begin
-									Graphics.moveto (x + 76) (y - x/4 + 80);
-									Graphics.lineto (x + 24) y end
-								else Graphics.moveto (x + 24) y;
+									Graphics.moveto (x + 100) (y - x/3 + 145);
+									Graphics.lineto (x + 50) y end
+								else Graphics.moveto (x + 50) y;
 								if right != Nil then
-								  Graphics.lineto (x + 76) (y + x/4 - 80);
-								zboub (x + 100) 
-									  (y - x/4 + 80)
+								  Graphics.lineto (x + 100) (y + x/3 - 145);
+								zboub (x + 150) 
+									  (y - x/3 + 145)
 									  left;
-								zboub (x + 100)
-									  (y + x/4 - 80)
+								zboub (x + 150)
+									  (y + x/3 - 145)
 									  right
 		in zboub 120 225
 
@@ -48,13 +48,13 @@ let() =
 				 Node(
 					 "l",
 					 Node("l-l", Nil, Nil),
-					 Node("l-r", Nil, Nil)),
+					 Nil),
 				 Node(
 					 "r",
 					 Node("r-l", Nil, Nil),
 					 Node("r-r",
 						  Nil,
-						  Node("r-r-r", Nil, Nil))))
+						  Nil)))
 
   in Graphics.open_graph "";
 	 Graphics.moveto 10 10;
