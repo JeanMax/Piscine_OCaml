@@ -6,12 +6,12 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/11/06 02:41:24 by mcanal           ###   ########.fr        #
+#    Updated: 2015/11/06 03:47:34 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = dot_slash
-SRC = ft_graphics.ml
+SRC = gardening.ml
 O_DIR = tmp
 S_DIR = src
 VPATH =	src
