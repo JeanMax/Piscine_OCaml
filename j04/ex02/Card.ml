@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/06 20:23:04 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/07 05:12:05 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/07 19:20:06 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -151,7 +151,10 @@ let toStringVerbose = function
 			  ^ "," ^ (Color.toStringVerbose co) ^ ")"
 
 let compare (va1, _) (va2, _) =
-  (Value.toInt va1) - (Value.toInt va2)
+  match (Value.toInt va1) - (Value.toInt va2) with
+	z when z < 0 -> -1
+  |	z when z > 0 -> 1
+  | _            -> 0
 
 let max ca1 ca2 =
   if ca1 >= ca2 then ca1 else ca2
