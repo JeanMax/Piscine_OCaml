@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/09 14:51:29 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/09 17:10:05 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/09 19:13:18 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -19,21 +19,31 @@ let count_coma s =
 
 let parse_line s =
   let len = count_coma s
-  in let a = (Array.make len "")
-  in let rec fill_array i j =
-	   let k = String.index_from s i ','
-	   in Array.set a j (String.sub s i (k - i));
-		  if j = len then a else fill_array k (j+1)
-	 in fill_array 0 0
+  in let a = (Array.make len 0.)
+  in let rec fill_array i start stop =
+	   Array.set a i (float_of_string (String.sub s start (stop - start)));
+	   if i = (len-1) 
+	   then (a, (String.sub s (stop+1) (String.length s - stop - 1)))
+	   else fill_array (i+1) (stop+1) (String.index_from s (stop+1) ',')
+	 in fill_array 0 0 (String.index s ',')
 
 let examples_of_file path =
   let ic = open_in path
   in let rec read l =
-	   try l :: (parse_line (input_line ic))
-	   with Sys_error e -> print_endline ("fail: " ^ e)
-		  | End_of_file -> close_in ic; l
+	   try read ((parse_line (input_line ic)) :: l)
+	   with Sys_error e -> print_endline ("fail: " ^ e); []
+		  | End_of_file -> close_in ic; List.rev l
 	 in read []
 
 let () = 
-  let a = parse_line "1,0,0.94331,0.19959,0.96132,0.40803,0.80514,0.56569,0.56687,0.70830,0.41836,0.83230,0.14939,0.89489,0.05167,0.93682,-0.24742,0.83939,-0.42811,0.75554,-0.50251,0.62563,-0.65515,0.50428,-0.68851,0.30912,-0.77097,0.15619,-0.75406,-0.04399,-0.75199,-0.17921,-0.66932,-0.34367,g"
-  in print_endline a.(0)
+  let rec test = function
+	  []         -> ()
+	| head::tail ->  match head with
+					   (x, y) -> 
+					   for i = 0 to Array.length x -1 do
+						 print_float x.(i);
+						 print_string ","
+					   done;
+					   print_endline y;
+					   test tail
+  in test (examples_of_file "ionosphere.test.csv")

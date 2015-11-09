@@ -48,6 +48,11 @@ let string_concat c =
   in con ""
 
 let rec list_replace n x = function
-	[]              -> []
-  | head::tail when n = 0 -> x::tail
+	[]                    -> []
+  | _::tail when n = 0    -> x::tail
   | head::tail            -> head::(list_replace (n - 1) x tail)
+
+let rec list_remove n = function
+    []                    -> []
+  | _::tail when n = 0    -> tail
+  | head::tail            -> head::(list_remove (n - 1) tail)
