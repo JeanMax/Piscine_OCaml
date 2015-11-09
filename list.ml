@@ -46,3 +46,8 @@ let string_concat c =
 	  []         -> s
 	| head::tail -> con (if s = "" then head else s ^ c ^ head) tail
   in con ""
+
+let rec list_replace n x = function
+	[]              -> []
+  | head::tail when n = 0 -> x::tail
+  | head::tail            -> head::(list_replace (n - 1) x tail)
