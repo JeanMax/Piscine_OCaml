@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/09 19:57:14 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/09 21:01:39 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/10 20:02:04 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -59,32 +59,34 @@ let list_remove x l =
 
 let one_nn (rl:radar list) (r:radar) =
   let rec zboub nrst_link nrst_eu = function
-	  []         -> ((snd nrst_link), (list_remove nrst_link rl))
+	  []         -> (nrst_link, (list_remove nrst_link rl))
 	| head::tail -> let eu = eu_dist (fst r) (fst head)
 					in if (eu < nrst_eu)
 					   then zboub head eu tail
 					   else zboub nrst_link nrst_eu tail
-  in zboub ([||], "") 2147483647. rl
+  in zboub ([||], "") max_float rl
 
 (* *********************************  ex08  ********************************* *)
 
-let more_repr l =
-  let rec count s n = function
-	  []                       ->  n
-	| head::tail when head = s -> count s (n+1) tail
-	| _::tail                  -> count s n tail
+let more_repr l r =
+  let rec count lnk n = function
+	  []                                 ->  n
+	| head::tail when snd head = snd lnk -> count lnk (n+1) tail
+	| _::tail                            -> count lnk n tail
   in let rec zboub mr i = function
-		 []         -> mr
-	   | head::tail -> (*print_endline ("-"^head^"-");*)
-					   let c = count head 0 l 
+		 []         -> snd mr
+	   | head::tail -> let c = count head 0 l 
 					   in if c > i
-						  then zboub head c tail
+							 || (c = i
+								 && eu_dist (fst head) r < eu_dist (fst mr) r)
+						  then ((* print_endline ("-"^(snd head)^"-"); *)
+							zboub head c tail)
 						  else zboub mr i tail
-  in zboub "" 0 l
+  in zboub ([||], "") 0 l
 
 let k_nn (rl:radar list) k (r:radar) =
   let rec zboub i rl2 l =
-	if i = 0 then more_repr l
+	if i = 0 then more_repr l (fst r)
 	else match (one_nn rl2 r) with
 		   (c, li) -> zboub (i-1) li (c::l)
   in zboub k rl []
@@ -100,12 +102,12 @@ let () =
   
   print_endline "\ntesting with hardcoded values:";
   print_endline (k_nn
-				   ([ ([|1.; 1.; 1.; 1.; 1.|], "1");
-					  ([|2.; 2.; 2.; 2.; 2.|], "2");
+				   ([ ([|0.; 0.; 0.; 0.; 0.|], "0");
+					  ([|1.; 1.; 1.; 1.; 1.|], "1");
 					  ([|2.; 2.; 2.; 2.; 2.|], "2");
 					  ([|3.; 3.; 3.; 3.; 3.|], "3");
-					  ([|4.; 4.; 4.; 4.; 4.|], "4a");
-					  ([|4.; 4.; 4.; 4.; 4.|], "4b");
-					  ([|5.; 5.; 5.; 5.; 5.|], "5") ])
+					  ([|4.; 4.; 4.; 4.; 4.|], "4");
+					  ([|5.; 5.; 5.; 5.; 5.|], "5");
+					  ([|6.; 6.; 6.; 6.; 6.|], "6");])
 				   5
 				   ([|1.; 2.; 3.; 4.; 5.|], "0");)
