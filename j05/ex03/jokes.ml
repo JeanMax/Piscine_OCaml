@@ -6,16 +6,17 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/09 13:07:31 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/09 22:41:48 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/10 16:04:03 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let count_coma s =
-  let rec count i n =
-    if i < 0 then n
-    else if s.[i] = ',' then count (i-1) (n+1)
-    else count (i-1) n
-  in count (String.length s - 1) 0
+
+let count_coma str =
+  let r = ref 0 in
+  for i = 0 to (String.length str) - 1 do
+	if str.[i] = ',' then incr r
+  done;
+  !r
 
 let joke path =
   Random.self_init ();
