@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/09 19:57:14 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/10 20:02:04 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/10 20:22:42 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -74,7 +74,7 @@ let more_repr l r =
 	| head::tail when snd head = snd lnk -> count lnk (n+1) tail
 	| _::tail                            -> count lnk n tail
   in let rec zboub mr i = function
-		 []         -> snd mr
+		 []         -> mr
 	   | head::tail -> let c = count head 0 l 
 					   in if c > i
 							 || (c = i
@@ -84,9 +84,19 @@ let more_repr l r =
 						  else zboub mr i tail
   in zboub ([||], "") 0 l
 
+let print_accuracy mr r l =
+  let rec zboub acc n = function
+	  []         -> acc /. n
+	| head::tail -> zboub (acc +. (eu_dist r (fst head))) (n+.1.) tail
+  in print_endline ("accuracy: "
+					^(string_of_float
+						( (eu_dist r mr) /. (zboub 0. 0. l) *. 100.))
+					^"%")
+	   
 let k_nn (rl:radar list) k (r:radar) =
   let rec zboub i rl2 l =
-	if i = 0 then more_repr l (fst r)
+	if i = 0 then let mr = more_repr l (fst r)
+				  in print_accuracy (fst mr) (fst r) l; snd mr
 	else match (one_nn rl2 r) with
 		   (c, li) -> zboub (i-1) li (c::l)
   in zboub k rl []
@@ -97,7 +107,7 @@ let () =
   print_endline "testing with csv:";
   print_endline (k_nn 
 				   (examples_of_file "../ex06/ionosphere.train.csv")
-				   3
+				   15
 				   ([| 1.;0.;0.74916;0.02549;0.98994;0.09792;0.75855;0.12877;0.74313;-0.09188;0.95842;0.02482;0.97921;-0.00469;0.96110;0.10195;0.91482;0.03756;0.71026;0.02683;0.81221;-0.08048;1.;0.;0.71764;-0.01207;0.82271;0.02552;0.72435;-0.01073;0.90409;0.11066;0.72837;0.02750|], "g"));
   
   print_endline "\ntesting with hardcoded values:";
