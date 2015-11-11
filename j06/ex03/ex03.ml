@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/10 21:44:32 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/11 01:38:38 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/11 19:15:46 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -82,9 +82,6 @@ module Make : MAKE =
 	  in zboub fb1
   end
 
-let test () =
-  () (* TODO *)
-
 (******************************************************************************)
 
 module Fixed4 : FIXED = 
@@ -101,4 +98,41 @@ let () =
     Fixed4.foreach (Fixed4.zero) 
 				   (Fixed4.one) 
 				   (fun f -> print_endline (Fixed4.to_string f));
-	test ()
+
+	print_endline "\ntesting of_int/to_int 42:";
+	print_endline (string_of_int (Fixed8.to_int (Fixed8.of_int 42)));
+	print_endline "\ntesting of_float/to_float 42.42:";
+	print_endline (string_of_float (Fixed8.to_float (Fixed8.of_float 42.42)));
+	print_endline "\ntesting to_string/of_float 42.42:";
+	print_endline (Fixed8.to_string (Fixed8.of_float 42.42));
+	print_endline "\ntesting zero:";
+	print_endline (Fixed8.to_string Fixed8.zero);
+	print_endline "\ntesting one:";
+	print_endline (Fixed8.to_string Fixed8.one);
+	print_endline "\ntesting succ one:";
+	print_endline (Fixed8.to_string (Fixed8.succ Fixed8.one));
+	print_endline "\ntesting pred one:";
+	print_endline (Fixed8.to_string (Fixed8.pred Fixed8.one));
+	print_endline "\ntesting min zero one:";
+	print_endline (Fixed8.to_string (Fixed8.min Fixed8.zero Fixed8.one));
+	print_endline "\ntesting gth zero one:";
+	print_endline (string_of_bool (Fixed8.gth Fixed8.zero Fixed8.one));
+	print_endline "\ntesting lth zero one:";
+	print_endline (string_of_bool (Fixed8.lth Fixed8.zero Fixed8.one));
+	print_endline "\ntesting gte zero one:";
+	print_endline (string_of_bool (Fixed8.gte Fixed8.zero Fixed8.one));
+	print_endline "\ntesting lte zero one:";
+	print_endline (string_of_bool (Fixed8.lte Fixed8.zero Fixed8.one));
+	print_endline "\ntesting eqp zero one:";
+	print_endline (string_of_bool (Fixed8.eqp Fixed8.zero Fixed8.one));
+	print_endline "\ntesting eqs zero one:";
+	print_endline (string_of_bool (Fixed8.eqs Fixed8.zero Fixed8.one));
+	print_endline "\ntesting add zero one:";
+	print_endline (Fixed8.to_string (Fixed8.add Fixed8.zero Fixed8.one));
+	print_endline "\ntesting sub zero one:";
+	print_endline (Fixed8.to_string (Fixed8.sub Fixed8.zero Fixed8.one));
+	print_endline "\ntesting mul zero one:";
+	print_endline (Fixed8.to_string (Fixed8.mul Fixed8.zero Fixed8.one));
+	print_endline "\ntesting div zero one:";
+	print_endline (Fixed8.to_string (Fixed8.div Fixed8.zero Fixed8.one));
+	
