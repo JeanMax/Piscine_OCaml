@@ -6,14 +6,14 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/11 23:53:30 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/12 01:09:53 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/12 17:05:46 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 class galifrey (dalek_l:Dalek.dalek list) 
 			   (doctor_l:Doctor.doctor list)  
 			   (people_l:People.people list)  =
-object (self)
+object
 
   val _dalek_l = dalek_l
   val _doctor_l = doctor_l
@@ -31,8 +31,7 @@ object (self)
 									da#talk; da#exterminate pe;
 									pe#talk; da#die;
 									print_endline "";
-		 zboub (da_t, dr, pe_t)		 
-	  | _            -> "Dang! War is broken..."
+									zboub (da_t, dr, pe_t)		 
 
 	in print_endline (zboub (_dalek_l, _doctor_l, _people_l))
 
