@@ -6,14 +6,14 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/11/12 19:23:18 by mcanal           ###   ########.fr        #
+#    Updated: 2015/11/12 19:24:40 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = a.out
 NAME_C = $(NAME)_c
 NAME_OPT = $(NAME)_opt
-SRC = Atom.ml main.ml
+SRC = Atom.ml Molecule.ml Alkane.ml Reaction.ml Alkane_combustion.ml main.ml
 
 OBJS = $(SRC:.ml=.cmo)
 OPTOBJS = $(SRC:.ml=.cmx)
