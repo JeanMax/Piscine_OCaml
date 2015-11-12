@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/11 20:14:29 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/12 01:29:12 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/12 00:48:58 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,6 +20,8 @@ object
 			  ^ String.make 1 (char_of_int ((Random.int 26) + 97))
   val mutable _shield = true
 					 
+  method get_hp = _hp
+
   method talk = 
 	let zboub = function
 		0  -> "Explain! Explain!"

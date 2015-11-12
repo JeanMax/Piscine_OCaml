@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/11 13:37:16 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/11 23:51:03 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/12 01:08:18 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -17,6 +17,8 @@ object (self)
   val _age = age
   val _sidekick : People.people = sidekick
   val _hp = hp
+
+  method get_hp = _hp
 			  
   method to_string = "name: " ^ _name ^ "... well, call me The Doctor"
 					 ^ "; age: " ^ (string_of_int _age)
@@ -34,14 +36,17 @@ object (self)
   method use_sonic_screwdriver = 
 	print_endline "Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii"
 
-  method private regenerate = new doctor _name _age _sidekick
+  method private regenerate = 
+	print_endline "Woooooosh! Oh yeah, I'm a timelord, that doesn't matter!!!";
+	new doctor _name _age _sidekick
 
   (* just to test private method *)
   method hurt x = print_endline "Ouch!";
 				  new doctor ~hp:(_hp - x) _name _age _sidekick
 
-  method die = print_endline "We're all stories, in the end.";
-			   self#regenerate 
+  method die = 
+	print_endline "That stupid screw-driver killed me...";
+	self#regenerate;
 
   initializer print_endline (_name ^ " is born!")
 end
