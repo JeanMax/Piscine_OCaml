@@ -56,3 +56,7 @@ let rec list_remove n = function
     []                    -> []
   | _::tail when n = 0    -> tail
   | head::tail            -> head::(list_remove (n - 1) tail)
+
+let rec list_remove_dup = function
+	[]         -> []
+  | head::tail -> head::(list_remove_dup (list_filter (fun x -> x<>head) tail))
