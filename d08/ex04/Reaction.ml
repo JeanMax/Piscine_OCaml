@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/12 19:14:19 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/13 01:16:33 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/13 19:47:00 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,5 +21,5 @@ object
   method virtual get_result : (Molecule.molecule * int) list
   method virtual balance : reaction
   method virtual is_balanced : bool
-  
+
 end
