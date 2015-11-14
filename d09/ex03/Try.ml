@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/14 00:33:19 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/14 02:07:08 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/14 17:19:29 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -59,8 +59,46 @@ module Try : TRY (*with type zboub*) =
 	
 	
 (* ************************************************************************** *)
+
 	
-	
+let print_try = function
+	Try.Success a -> print_endline ("Success "^a)
+  | Try.Failure _  -> print_endline ("Failure")
+
+let useless_fun a =
+  if a = "crash" then (failwith "badaboum")
+  else Try.Success (a^a)
+
 let () =
-  print_endline "testing :"
-				
+  let t = Try.return "42" in
+  let crash = Try.return "crash" in
+
+  print_endline "testing return 42:";
+  print_try t;
+
+  print_endline "\ntesting bind 42:";
+  print_try (Try.bind t useless_fun);
+
+  print_endline "\ntesting bind crash:";
+  let f = (Try.bind crash useless_fun) in
+  print_try f;
+
+  print_endline "\ntesting recover 42:";
+  print_try (Try.recover t (fun x -> Success "failure"));
+
+  print_endline "\ntesting recover Failure:";
+  print_try (Try.recover f (fun x -> Success "failure"));
+
+  print_endline "\ntesting filter 42:";
+  print_try (Try.filter f (fun x -> x = "42"));
+
+  print_endline "\ntesting filter crash:";
+  print_try (Try.filter t (fun x -> x = "42"));
+
+  print_endline "\ntesting flatten S/S:";
+  print_try (Try.flatten (Try.Success t));
+
+  print_endline "\ntesting flatten S/F:";
+  try print_try (Try.flatten (Try.Success f))
+  with Failure e -> print_endline e;
+	   

@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/14 01:56:10 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/14 02:59:07 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/14 18:05:11 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -60,6 +60,47 @@ module Set : SET (*with type zboub*) =
 
 (* ************************************************************************** *)
 
+let print_list l =
+  List.iter (fun x -> print_int x; print_string "; ") l;
+  print_endline ""
 
 let () =
-  print_endline "testing:";
+  let l1 = [1;2;3;4;5] in
+  let l2 = [4;5;6;7;8] in
+  print_string "l1: ";
+  print_list l1;
+  print_string "l2: ";
+  print_list l2;
+
+  print_endline "\ntesting return 42:";
+  print_list (Set.return 42);
+  
+  print_endline "\ntesting bind l1 (x2):";
+  print_list (Set.bind l1 (fun x -> [2 * x]));
+
+  print_endline "\ntesting union l1 l2:";
+  print_list (Set.union l1 l2);
+  
+  print_endline "\ntesting inter l1 l2:";
+  print_list (Set.inter l1 l2);
+  
+  print_endline "\ntesting diff l1 l2:";
+  print_list (Set.diff l1 l2);
+
+  print_endline "\ntesting filter >3 l1:";
+  print_list (Set.filter l1 (fun x -> x > 3));
+  
+  print_endline "\ntesting foreach print_int l1:";
+  Set.foreach l1 print_int;
+  
+  print_endline "\n\ntesting for_all >3 l1:";
+  print_endline (string_of_bool (Set.for_all l1 (fun x -> x > 3)));
+
+  print_endline "\ntesting for_all >3 l2:";
+  print_endline (string_of_bool (Set.for_all l2 (fun x -> x > 3)));
+
+  print_endline "\ntesting exist 3 l1:";
+  print_endline (string_of_bool (Set.exists l1 (fun x -> x = 3)));
+
+  print_endline "\ntesting exist 3 l2:";
+  print_endline (string_of_bool (Set.exists l2 (fun x -> x = 3)));
