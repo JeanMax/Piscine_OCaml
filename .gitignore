@@ -3,4 +3,4 @@
 *.cmo
 *.o
 .depend
-a.out
+a.out*
