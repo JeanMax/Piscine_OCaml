@@ -1,3 +1,6 @@
 [submodule "Rush00"]
 		   path = Rush00
 		   url = https://github.com/JeanMax/Rush00_OCaml.git
+[submodule "Rush01"]		
+		   path = Rush01
+		   url = https://github.com/JeanMax/Rush01_OCaml.git
