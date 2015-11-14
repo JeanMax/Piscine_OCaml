@@ -6,7 +6,7 @@
 (*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/11/12 18:27:33 by mcanal            #+#    #+#             *)
-(*   Updated: 2015/11/12 22:11:52 by mcanal           ###   ########.fr       *)
+(*   Updated: 2015/11/13 01:57:17 by mcanal           ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -25,7 +25,7 @@ object
 											   then (string_of_int n) 
 											   else "")) 
 										   (nt::tl)
-	  | hd::tl                    -> str ^ hd#symbol 
+	  | hd::_                     -> str ^ hd#symbol 
 									 ^ (if n > 1 
 										then (string_of_int n) 
 										else "")
@@ -76,6 +76,24 @@ class carbon_dioxyde =
 object 
   inherit molecule "carbon_dioxyde" 
 				   [new Atom.carbon; new Atom.oxygen; new Atom.oxygen]
+end
+
+class carbon_monoxyde =
+object 
+  inherit molecule "carbon_monoxyde" 
+				   [new Atom.carbon; new Atom.oxygen]
+end
+
+class soot =
+object 
+  inherit molecule "soot" 
+				   [new Atom.carbon]
+end
+
+class dioxygen =
+object 
+  inherit molecule "dioxygen" 
+				   [new Atom.oxygen; new Atom.oxygen]
 end
 
 class citric_acid =
